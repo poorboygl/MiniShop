@@ -1,0 +1,73 @@
+.add-btn, .row-input-form {
+    margin-bottom: 10px;
+}
+.add-btn {
+    margin-left: 5px;
+}
+.delete-btn, .delete-btn:active {
+  background-color: #fff !important;
+  color: #dc3545 !important;
+}
+.table-btn {
+  padding: 2px 10px 2px 10px;
+}
+.toast-top-right {
+    top: 50px !important;
+    right: 12px;
+}
+h2{
+text-align: center;
+margin: 10px 0 ;
+}
+.tables-row {
+  margin-left: 20px;
+}
+input {
+  padding-left: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  width: 100%;
+  border: 1px solid #adadad;
+}
+i {
+  margin-right: 5px;
+}
+.form-check-input {
+  margin-left: 0px;
+  width: auto;
+  transform: scale(1.5);
+  border: none;
+}
+thead tr th .form-check-input {
+  margin-top: -17px !important;
+}
+:host ::ng-deep .dropdown-btn {
+  margin-top: 5px;
+  padding-left: 11px !important;
+  padding-top: 2px !important;
+  height: 30px;
+}
+
+:host ::ng-deep .dropdown-multiselect__caret {
+  margin-top: 4px !important;
+}
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item {
+  height: 24px;
+}
+
+:host ::ng-deep .dropdown-multiselect--active .dropdown-multiselect__caret:before {
+  top: 85% !important;
+}
+
+.input-form-cls {
+  height: 20vh;
+}
+.grid-cls {
+  height: 67vh;
+}
+.total-rows {
+  text-align: right;
+  margin-top: 7px;
+  color: rgb(0, 0, 0);
+}

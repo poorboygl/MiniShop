@@ -1,0 +1,227 @@
+<div class="container-fluid" style="margin-right: auto; margin-left: auto;">
+  <blockquote class="blockquote ml-5">
+    <h2>VuFE-MiniShop</h2>
+  </blockquote>
+  <div class="main-form">
+    <div class="row">
+      <div class="col col-2">
+        <div class="row">
+          <div class="col col-12 input-form-cls">
+            <div class="row row-input-form">
+              <div class="col col-6"><h4>Shop</h4></div>
+              <div class="col col-6">
+                <h6 class="total-rows">Row(s): {{shopList.length}}</h6>
+              </div>
+              <div class="col col-12">
+                <input [(ngModel)]="inputShop.Id" disabled>
+              </div>
+              <div class="col col-12">
+                <input placeholder="Name" [(ngModel)]="inputShop.Name">
+              </div>
+              <div class="col col-12">
+                <input placeholder="Location" [(ngModel)]="inputShop.Location">
+              </div>
+            </div>
+          </div>
+          <div class="col col-12 text-right">		
+            <i class="fa fa-plus-square-o" (click)="onAddShop()" style="font-size:2em;"></i>
+            <i class="fa fa-trash-o" (click)="onDeleteShop()" style="font-size:2.2em;"></i>
+            <i class="fa fa-random" (click)="onAddShopRandom()" style="font-size:2em;"></i>
+          </div>
+          <div class="col col-12 grid-cls">
+            <div class="grid-area">
+              <ng-container>
+                <table class="table table-hover table-border table-striped">
+                  <thead class="p-3 mb-2 bg-success text-white">
+                    <tr>
+                      <th scope="col" width="10%"><input class="form-check-input" type="checkbox" (click)="onCheckAllShop($event)"></th>
+                      <th width="45%">Name</th>
+                      <th width="45%">Location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let shop of shopList; let i = index;">
+                      <th scope="row" width="10%"><input class="form-check-input" type="checkbox" [(ngModel)]="shop.Checked"></th>
+                      <td width="45%">{{ shop.Name }}</td>
+                      <td width="45%">{{ shop.Location }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-2">
+        <div class="row">
+          <div class="col col-12 input-form-cls">
+            <div class="row row-input-form">
+              <div class="col col-6"><h4>Product</h4></div>
+              <div class="col col-6">
+                <h6 class="total-rows">Row(s): {{productList.length}}</h6>
+              </div>
+              <div class="col col-12">
+                <input [(ngModel)]="inputProduct.Id" disabled>
+              </div>
+              <div class="col col-12">
+                <input placeholder="Name" [(ngModel)]="inputProduct.Name">
+              </div>
+              <div class="col col-12">
+                <input placeholder="Price" type="number" min="0" (input)="checkValue($event)" [(ngModel)]="inputProduct.Price">
+              </div>
+              <div class="col col-12">
+                <ng-multiselect-dropdown [name]="'1'" [settings]="dropdownSettingTables" [data]="shopList"
+                [placeholder]="'Shop'" [(ngModel)]="inputProduct.Shops">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+          </div>
+          <div class="col col-12 text-right">
+            <i class="fa fa-plus-square-o" (click)="onAddProduct()" style="font-size:2em;"></i>
+            <i class="fa fa-trash-o" (click)="onDeleteProduct()" style="font-size:2.2em;"></i>
+            <i class="fa fa-random" (click)="onAddProductRandom()" style="font-size:2em;"></i>
+          </div>
+          <div class="col col-12 grid-cls">
+            <div class="grid-area">
+              <ng-container>
+                <table class="table table-hover table-border table-striped">
+                  <thead class="p-3 mb-2 bg-success text-white">
+                    <tr>
+                      <th scope="col" width="10%"><input class="form-check-input" type="checkbox" (click)="onCheckAllProduct($event)"></th>
+                      <th width="30%">Name</th>
+                      <th width="30%">Price</th>
+                      <th width="30%">Shop</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of productList; let i = index;">
+                      <th scope="row" width="10%"><input class="form-check-input" type="checkbox" [(ngModel)]="product.Checked"></th>
+                      <td width="30%">{{ product.Name }}</td>
+                      <td width="30%">{{ product.Price }}</td>
+                      <td width="30%">{{ product.ShopName }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-4">
+        <div class="row">
+          <div class="col col-12 input-form-cls">
+            <div class="row row-input-form">
+              <div class="col col-6"><h4>Customer</h4></div>
+              <div class="col col-6">
+                <h6 class="total-rows">Row(s): {{customerList.length}}</h6>
+              </div>
+              <div class="col col-12">
+                <input [(ngModel)]="inputCustomer.Id" disabled>
+              </div>
+              <div class="col col-6">
+                <input placeholder="Name" [(ngModel)]="inputCustomer.Name">
+              </div>
+              <div class="col col-6">
+                <input  placeholder="Dob" type="date" [(ngModel)]="inputCustomer.Dob">
+              </div>
+              <div class="col col-12">
+                <input placeholder="Email" [(ngModel)]="inputCustomer.Email">
+              </div>
+              <div class="col col-6">
+                <ng-multiselect-dropdown [name]="'2'" [settings]="dropdownSettingCustomers" [data]="shopList"
+                [placeholder]="'Shop'" [(ngModel)]="inputCustomer.Shops" (onSelect)="onCustomerShopSelect($event)"
+                (onSelectAll)="onCustomerShopSelectAll($event)">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col col-6">
+                <ng-multiselect-dropdown [name]="'3'" [settings]="dropdownSettingCustomers" [data]="customerProductList"
+                [placeholder]="'Product'" [(ngModel)]="inputCustomer.Products" [disabled]="!inputCustomer.Shops || !inputCustomer.Shops.length">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+          </div>
+          <div class="col col-12 text-right">
+            <i class="fa fa-plus-square-o" (click)="onAddCustomer()" style="font-size:2em;"></i>
+            <i class="fa fa-trash-o" (click)="onDeleteCustomer()" style="font-size:2.2em;"></i>
+            <i class="fa fa-random" (click)="onAddCustomerRandom()" style="font-size:2em;"></i>
+          </div>
+          <div class="col col-12 grid-cls">
+            <div class="grid-area">
+              <ng-container>
+                <table class="table table-hover table-border table-striped">
+                  <thead class="p-3 mb-2 bg-success text-white">
+                    <tr>
+                      <th scope="col" width="8%"><input class="form-check-input" type="checkbox" (click)="onCheckAllCustomer($event)"></th>
+                      <th width="18%">Name</th>
+                      <th width="20%">DOB</th>
+                      <th width="17%">Email</th>
+                      <th width="20%">Shop</th>
+                      <th width="17%">Product</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let customer of customerList; let i = index;">
+                      <th scope="row" width="8%"><input class="form-check-input" type="checkbox" [(ngModel)]="customer.Checked"></th>
+                      <td width="18%">{{ customer.Name }}</td>
+                      <td width="20%">{{ customer.Dob }}</td>
+                      <td width="17%">{{ customer.Email }}</td>
+                      <td width="20%">{{ customer.ShopNames }}</td>
+                      <td width="17%">{{ customer.ProductNames }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-4">
+        <div class="row">
+          <div class="col col-12">
+            <div class="row row-input-form">
+              <div class="col col-6"><h4>Data</h4></div>
+              <div class="col col-6">
+                <h6 class="total-rows">Row(s): {{sortedList?.length || 0}}</h6>
+              </div>
+              <div class="col col-12" style="text-align: right;">
+                <button class="btn btn-info add-btn" (click)="onSave()">Add</button>
+                <button class="btn btn-success add-btn" (click)="onLoad()">Search</button>
+                <button class="btn btn-danger add-btn" (click)="onClear()">Clear Data</button>
+              </div>
+            </div>
+          </div>
+          <div class="col col-12">
+            <div class="grid-area">
+              <ng-container>
+                <table class="table table-hover table-border table-striped">
+                  <thead class="p-3 mb-2 bg-success text-white">
+                    <tr>
+                      <th width="10%">No</th>
+                      <th width="15%">Name</th>
+                      <th width="15%">Email</th>
+                      <th width="15%">Shop</th>
+                      <th width="15%">Location</th>
+                      <th width="15%">Product</th>
+                      <th width="15%">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let sorted of sortedList; let i = index;">
+                      <td width="10%">{{ i + 1 }}</td>
+                      <td width="15%">{{ sorted.Name }}</td>
+                      <td width="15%">{{ sorted.Email }}</td>
+                      <td width="15%">{{ sorted.ShopName }}</td>
+                      <td width="15%">{{ sorted.ShopLocation }}</td>
+                      <td width="15%">{{ sorted.ProductName }}</td>
+                      <td width="15%">{{ sorted.Price }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
