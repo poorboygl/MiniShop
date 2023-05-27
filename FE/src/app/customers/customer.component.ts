@@ -15,16 +15,6 @@ const RAM_STRING = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   styleUrls: ['./customer.component.scss'],
 })
 export class CustomerComponent implements OnInit {
-  inputShop: ShopModel = new ShopModel();
-  inputProduct: ProductModel = new ProductModel();
-  inputCustomer: CustomerModel = new CustomerModel();
-
-  shopList: ShopModel[] = [];
-  productList: ProductModel[] = [];
-  customerList: CustomerModel[] = [];
-  customerProductList: ProductModel[] = [];
-  sortedList: SortedResultModel[] = [];
-
   dropdownSettingTables: IDropdownSettings = {
     singleSelection: true,
     idField: "Id",
@@ -42,6 +32,18 @@ export class CustomerComponent implements OnInit {
     itemsShowLimit: 1,
     allowSearchFilter: false
   }
+
+  inputShop: ShopModel = new ShopModel();
+  inputProduct: ProductModel = new ProductModel();
+  inputCustomer: CustomerModel = new CustomerModel();
+  strCustomer: string = '';
+  strProduct: string = '';
+
+  shopList: ShopModel[] = [];
+  productList: ProductModel[] = [];
+  customerList: CustomerModel[] = [];
+  customerProductList: ProductModel[] = [];
+  sortedList: SortedResultModel[] = [];  
 
   constructor(
     private service: ApiService,
@@ -158,7 +160,8 @@ export class CustomerComponent implements OnInit {
   }
 
   onLoad() {
-    this.service.Get().subscribe(
+    console.log("Test",this.strCustomer)
+    this.service.Get(this.strProduct, this.strCustomer).subscribe(
       (res: any) => {
         if (res.Success) {
           this.sortedList = res.Data;
@@ -237,7 +240,7 @@ export class CustomerComponent implements OnInit {
     return result;
   }
 
-  checkValue(event: any) {
+  checkValueValid(event: any) {
     if (event.target.value < 0) {
       event.target.value = 0;
     }

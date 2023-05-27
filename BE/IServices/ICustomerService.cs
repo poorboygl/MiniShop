@@ -6,9 +6,9 @@ namespace BE.IServices
 {
     public interface ICustomerService
     {
-        public Task<ResponseDto> Get();
-        public Task<ResponseDto> AddDataPayment(CustomerProductsDto model);
+        Task<ResponseDto> Get(string strProduct, string strCustomer);
+        Task<ResponseDto> AddDataPayment(CustomerProductsDto model);
 
-        public Task<ResponseDto> RefreshData();
+        Task<ResponseDto> RefreshData();
     }
 }

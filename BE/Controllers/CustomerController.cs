@@ -17,9 +17,9 @@ namespace BE.Controllers
         }
 
         [HttpGet]
-        public async Task<ResponseDto> Get()
+        public async Task<ResponseDto> Get([FromQuery]string strProduct, [FromQuery]string strCustomer)
         {
-            var rs = await _customerService.Get();
+            var rs = await _customerService.Get(strProduct, strCustomer);
             return rs;
         }
 

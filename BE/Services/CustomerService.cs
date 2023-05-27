@@ -14,7 +14,7 @@ namespace BE.Repositories
         {
         }
 
-        public async Task<ResponseDto> Get()
+        public async Task<ResponseDto> Get(string strProduct, string strCustomer)
         {
             var result = new ResponseDto()
             {
@@ -44,6 +44,15 @@ namespace BE.Repositories
                     {
                         return result;
                     }
+                    if (!string.IsNullOrEmpty(strProduct))
+                    {
+                        products = products.Where(x => x.Name.Contains(strProduct)).ToList();
+                    }
+                    if (!string.IsNullOrEmpty(strCustomer))
+                    {
+                        customers = customers.Where(x => x.Name.Contains(strCustomer)).ToList();
+                    }
+                    
 
                     var rs = (from cust in customers
                               join cusPro in context.CustomerProducts on cust.Id equals cusPro.CustomerId

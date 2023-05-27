@@ -9,8 +9,8 @@ import { CustomerProductsDto } from '../models/shop.model';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  Get() {
-    return this.http.get(environment.SERVER_API_URL + '/Customer').pipe(
+  Get(strProduct:string, strCustomer: string) {
+    return this.http.get(environment.SERVER_API_URL + '/Customer?strProduct=' + strProduct + '&strCustomer=' + strCustomer).pipe(
       map((data: any) => data as any),
       catchError(this.handleError)
     );
